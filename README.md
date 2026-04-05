@@ -1,17 +1,26 @@
+
 # Graph Algorithm Visualizer
 
-## Description
+## Introduction
 
-Develop a visualization tool for graph traversal algorithms, focusing on Dijkstra and A* algorithms, utilizing Python and Pygame.
+In this project, we developed a tool to visualize different graph traversal algorithms in Python. The main focus of the project was on Dijkstra and A* algorithms but we also implemented BFS (Breadth-First Search) and DFS (Depth-First Search). The methodology and descriptions of the algorithms are discussed in the “Algorithms” section. 
+The pathfinding visualization demonstrates an animation to trace paths according to the algorithms. It utilizes Pygame to visualize. The animation allows one to choose start and end points and build borders before finding a path. Different features and keys are explored in “Usage.” 
+
 
 ## Project Structure
 
 - **algorithms**
   - `dijkstra.py`: Implementation of Dijkstra's algorithm.
   - `a_star.py`: Implementation of A* algorithm for pathfinding.
+  - `bfs.py`: Implementation of BFS algorithm.
+  - `dfs.py`: Implementation of DFS algorithm.
 - **components**
   - `spot.py`: Definition and management of a spot/node in the grid.
   - `grid.py`: Handling grid functionality, drawings, and updates.
+- **tests**
+  - `benchmark_utils.py`: Benchmarking utilities for all the algorithms. Non Graphical Versions of algorith,s
+  - `run_benchmarks.py`: Benchmarking to compare Python's built-in Dijkstra's Algoritm and our version.
+  - `test_algorithms.py`: Unit tests for the algorithms.
 - **assets**
   - `demo.mov`: A demonstration video providing an example of expected outcomes.
 - **main.py**: Main script to execute the application.
@@ -19,86 +28,82 @@ Develop a visualization tool for graph traversal algorithms, focusing on Dijkstr
 
 ## Prerequisites
 
-- **Python** (3.x recommended)
-- **Poetry**
-- **Pygame**
+- **Python** (3.11 or later preferred to run Poetry)
+- **Poetry** : A tool to manage dependencies
+- **Pygame** : A Python library for creating games and multimedia applications.
+- **dijkstar** : A Python library for graph algorithms
 
-To install dependencies, utilize Poetry:
+If you haven't installed Poetry, you can do so following the instructions here.
 ```bash
-poetry add pygame
+pip install poetry
+```
+To install dependencies, use Poetry and it will install all the dependencies:
+```bash
+poetry install
 ```
 
-Ensure the virtual environment is active when running the project.
+Active the virtual environment before running the project.
 
-## Requirements
+## Usage
+- Running python3 main.py will run the program. A clear, white grid appears.
+- To start, position a starting point (green point) and ending point (red point) using the left click. 
+- After that, borders (black blocks) can be drawn using the left click.
+- Finally, selected algorithm runs according to the keys.
+- When the algorithm finds the path, it will appear in yellow.
+- The terminal displays the time taken, nodes traversed, path length and nodes skipped after the path is found.
 
-### Core Features
+## Interacting with the Grid
 
-- Implement and visualize **Dijkstra and A* algorithms** using Pygame.
-- **Path Tracing**: Implement a smooth animation to trace the final path.
-- Allow users to:
-  - Define **start** and **end** nodes.
-  - **Draw barriers** and **clear** them.
-  - **Select** an algorithm to execute.
-  - **Reset** the grid or **clear** the previously found path, while retaining barriers. Ensure that the algorithm can be run again after clearing the path.
-- Ensure the pathfinding algorithm **terminates once the start node finds the end node**.
+**Set Start and End Points:** **Left-click** to place the start (green) and end (red) points on the grid.
 
-Please check out the demonstration video for a better understanding of the core features in the assets folder.
+**Create Barriers:** After setting start and end points, additional left-clicks create barriers (black).
 
-### [Optional] Additional Features (For Groups of 2 or 3)
+**Remove Elements:** **Right-click** to remove a barrier, start, or end point.
 
-- Implement **one (groups of 2) or two (groups of 3)** additional graph traversal algorithms.
-- Display pathfinding statistics. They must at least include:
-  - Time taken to traverse.
-  - How many nodes were traversed (space complexity).
-  - One or two additional statistics of your choice. The more the merrier. Be creative!
+**Drag to Create Barriers:** Click and drag the left mouse button to draw continuous barriers.
 
-Note these features are a must if you are in a group of 2 or 3. If you are a solo participant, you can implement these features for extra points.
+**Using Keyboard Shortcuts**
+**A* Algorithm*: Press **Space** to run the A* algorithm.
 
-### Bonus: Beat Python’s Built-in (10% Extra Points)
+**Dijkstra's Algorithm:** Press **D** to run Dijkstra's algorithm.
 
-Outperform Python's built-in graph traversal in terms of time complexity using one of your implemented algorithms. Ensure relevant comparisons (e.g., Dijkstra with Dijkstra). Document your results, methodology, and findings in your README.md. It is also important to mention why your implementation is able to outperform (or not) the built-in traversal. Bonus points can carry over to other assignments, such as the midterm. Of course, if you produce very impressive results, you may be rewarded with more than 10% extra points and might consider writing a paper about it. You can be creative with your methodology, but ensure that it is valid and reproducible. Include unit tests and screenshots of your results.
+**Breadth-First Search (BFS):** Press **B** to run the BFS algorithm.
 
-### Note
+**Depth-First Search (DFS):** Press **F** to run the DFS algorithm.
 
-Feel free to modify the given template code according to your project needs.
+**Clear Path:** Press **C** to clear the path and traces, retaining barriers and points.
 
-## Grading Rubric
+**Reset Grid:** Press **R** to reset the grid completely.
 
-1. **Algorithm Implementation and Visualization**: 50% (65% for solo participants)
-   - Effective implementation and visualization of **Dijkstra and A* algorithms**.
-2. **Code Quality and User Interaction**: 15%
-   - Maintain code quality and ensure intuitive user interactions.
-   - Modular code with proper documentation.
-   - If you want more methodology points, please make sure your code is properly organized and documented so that I can understand your methodology. If not properly documented, I will not be able to understand your methodology and will not be able to give you points.
-3. **Testing and Validation**: 20%
-   - Validate the algorithm’s correctness and efficiency through testing.
-4. [Optional] **Pathfinding Statistics**: 5% (for groups only)
-   - Time taken to traverse.
-   - How many nodes were traversed (space complexity).
-   - One or two additional statistics of your choice. The more the merrier. Be creative!
-5. [Optional] **Additional Algorithm(s) Implementation**: 10% (for groups only)
-   - Implement two more graph traversal algorithms at least.
+## Output Statistics
+
+After each algorithm run, statistics such as time taken, nodes traversed, path length, and nodes skipped are printed to the console. This information helps compare the efficiency and characteristics of each algorithm.
+EXAMPLE : “Dijkstra's Time: 2.971236 seconds, Nodes Traversed: 1805, Path Length: 43, Nodes Skipped: 3470”
 
 
-## Submission
+## Algorithms
 
-Ensure to push your final code to your designated repository before the deadline.
+### A*
+A*, or A Star, is a graph traversal algorithm that is often used to find the shortest path. It employes a heuristic function and considers both costs of the path from starting point to the current node and from the current node to the end point. 
 
-Wishing you the best of luck, and happy coding!
+### BFS
+Breadth-First Search, often abbreviated as BFS, is a graph traversal and search algorithm that guarantees to find the shortest path. It visits all the nodes in the depth level before going into the next depth level, using a queue to maintain the order.
 
-## Your README
+### DFS
+Depth-First Search, often abbreviated as DFS, is another algorithm for traversing and searching graphs. It visits explore all the branches of the current node in depth before moving to the next one, uses stack to maintain the order. Although it doesn’t guarantee the shortest path, it is preferred for maze solving tasks.
 
-In your ```README.md```, include:
-- Descriptions of algorithms implemented.
-- Encountered issues or challenges.
-- Instructions on code execution.
-- [If applicable] Methodology and findings from the bonus challenge of beating Python’s built-in algorithms.
-- Any extra information you would like to share with me.
-- **List the names of all group members, or your own name if you are a solo participant.**
+### Dijkstra
+Dijkstra’a algorithm is a greedy, single source shortest path algorithm. It iteratively finds the shortest path from the source to other nodes and updates until the shortest path is found. 
 
-### Tutorial
 
-For further guidance on implementing pathfinding algorithms, consider watching the following tutorial: [Coding Train A* Algorithm Tutorial](https://www.youtube.com/watch?v=JtiK0DOeI4A). This resource may provide additional insights or methods for executing pathfinding algorithms in visual formats.
+## Challenges
+- One of the challenges was to test and validate our algorithms. It was hard to decide how we wanted to test them, the algorithm file itself or the application run by main.py. We tried different techniques but finally found the one that works the best for the algorithm.
 
-**Note:** Plagiarism of code from this tutorial will result in a grade of 0 for this assignment. Please ensure that you are not copying code from this tutorial, and that you are implementing the algorithms yourself.
+- We tried the find the optimal way to print the statistics. After trying several methods, such as printing with the visualization tool and printing on the terminal, we concluded that printing on the terminal is the most efficient way. It allows us to compare algorithms after running them on the same scenario as the statistics stay on the terminal after every run.
+
+- Benchmarking for the bonus part was also challenging. It required further understanding of the Dijkstra's algorithm and out-of-the-box thinking. We tried our best to beat the Dijkstar module implementation but were unable to do so.
+
+## Contributors
+Nathan Wongkar (nathan.wongkar@u.yale-nus.edu.sg) and Sevval Begum Bayram (sbayram@u.yale-nus.edu.sg)
+
+November 2023
